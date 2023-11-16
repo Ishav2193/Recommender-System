@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import warnings
-import streamlit as st
+import streamlit as st 
 from numpy.linalg import norm
+import seaborn as sns
 warnings.filterwarnings('ignore')
 
 ratings=pd.read_csv('https://raw.githubusercontent.com/AkshatSan/MovieRecomm/main/data/ratings.csv',sep='\t')
