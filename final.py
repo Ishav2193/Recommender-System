@@ -172,9 +172,9 @@ def get_data_with_user_ids(gender,age):
             data___=f_age_7   
             return user_id,data___
 
-#"""
+
 #THE BELOW FUNCTION WILL GOING TO RETURN SIMILAR USERS THAT WE HAVE SELECTED
-#"""
+
 def recommend_users(gender,age,user_id,reqd_data):
     similar_user_ids=[]
     mapping_dict_for_age={'Under 18':1, '56+':7, '25-34':3, '50-55':4, '18-24':2, '45-49':6, '35-44':5} 
@@ -201,17 +201,6 @@ def recommend_users(gender,age,user_id,reqd_data):
 
 def recommend(gender,age,user_id,reqd_data):
     similar_user_ids,pt,p=recommend_users(gender,age,user_id,reqd_data)
-    # dd={}
-    # for i in list(enumerate(pt.index)):      #pt.index contains users ids
-    #     dd[i[1]]=i[0]
-    # new_l=[]   #new_l contains index of user_ids 
-    # for i in similar_user_ids:
-    #     new_l.append(dd[i])     
-    # movies_recommended=[]
-    # for i in new_l:
-    #     ind_for_row=pt.index[i]
-    #     ind_for_col=np.argmax(pt[pt.index==pt.index[ind_for_row]],axis=1)
-    #     movies_recommended.append(pt.columns[ind_for_col])
     movies_recommended=[]
     for i in similar_user_ids:
         get_row=p[p['user_id']==i]
@@ -229,61 +218,8 @@ st.subheader('This recommender system is based on collaborative filtering techni
 gender=['M','F']
 age=['Under 18', '56+', '25-34', '50-55', '18-24', '45-49', '35-44']
 gender_selected=st.selectbox("select your gender",gender)
-#user_id=[]
 age_selected=st.selectbox("select your age bracket",age) 
-#data___=pd.DataFrame()
 user_id,data___=get_data_with_user_ids(gender_selected,age_selected)
-# if gender_selected=='M':
-#     if age=='Under 18':
-#         user_id.append(m_age_1['user_id'].unique())
-#         data___=m_age_1
-#         exit
-#     elif age=='18-24':
-#         user_id.append(m_age_2['user_id'].unique())
-#         data___=m_age_2
-#         exit
-#     elif age=='25-34':
-#         user_id.append(m_age_3['user_id'].unique())
-#         data___=m_age_3
-#         exit 
-#     elif age=='50-55':
-#         user_id.append(m_age_4['user_id'].unique())
-#         data___=m_age_4
-#         exit
-#     elif age=='35-44':
-#         user_id.append(m_age_5['user_id'].unique())
-#         data___=m_age_5
-#         exit
-#     elif age=='45-49':
-#         user_id.append(m_age_6['user_id'].unique())
-#         data___=m_age_6
-#         exit
-#     else:
-#         user_id.append(m_age_7['user_id'].unique())
-#         data___=m_age_7
-#         exit
-# else:
-#     if age=='Under 18':
-#         user_id.append(f_age_1['user_id'].unique())
-#         data___=f_age_1
-#     elif age=='18-24':
-#         user_id.append(f_age_2['user_id'].unique())
-#         data___=f_age_2
-#     elif age=='25-34':
-#         user_id.append(f_age_3['user_id'].unique())
-#         data___=f_age_3
-#     elif age=='50-55':
-#         user_id.append(f_age_4['user_id'].unique())
-#         data___=f_age_4
-#     elif age=='35-44':
-#         user_id.append(f_age_5['user_id'].unique())
-#         data___=f_age_5
-#     elif age=='45-49':
-#         user_id.append(f_age_6['user_id'].unique())
-#         data___=f_age_6
-#     else:
-#         user_id.append(f_age_7['user_id'].unique()) 
-#         data___=f_age_7
 
 selected_user=st.selectbox("select your user_id",user_id[0])
 if st.button('Show Recommendation'):
