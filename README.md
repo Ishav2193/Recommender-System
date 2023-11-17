@@ -2,3 +2,5 @@
 Movie recommender system using collaborative filtering techniques
 <br>
 install streamlit
+<br>
+https://ishav-movie-recommender-system-1.streamlit.app/
