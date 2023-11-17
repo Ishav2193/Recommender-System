@@ -167,7 +167,7 @@ def recommend(gender,age,user_id,reqd_data):
 import streamlit as st
 st.header('Movie recommendation system')  #adding title
 st.subheader('This recommender system is based on collaborative filtering techniques using cosine similarity')
-gender=df['gender'].unique()
+gender=['M','F']
 age=['Under 18', '56+', '25-34', '50-55', '18-24', '45-49', '35-44']
 gender_selected=st.selectbox("select your gender",gender)
 user_id=[]
