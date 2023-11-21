@@ -54,8 +54,8 @@ class DataPreprocessor:
         #logging.info('segregate data on basis of gender')
         df_female=data[data["gender"]=='F']
         df_male=data[data["gender"]=='M']
-        df_female.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
-        df_male.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
+        # df_female.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
+        # df_male.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
         #logging.info('creating dictionary for age_desc')
         d={}
         c=1
