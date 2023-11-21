@@ -3,7 +3,7 @@ import numpy as np
 import warnings
 from numpy.linalg import norm
 from dataclasses import dataclass
-import logging
+#import logging
 from data_loading_and_preprocessing import DataPreprocessor
 
 obj=DataPreprocessor()
@@ -11,7 +11,7 @@ obj=DataPreprocessor()
 class MovieRecommender:
 
     def get_data_with_user_ids(self,gender:str,age:str):
-        logging.info('started with get_data_with_users_block')
+        #logging.info('started with get_data_with_users_block')
         df_female,df_male=obj.get_genres_into_numerical()
         user_id=[]
         data___=pd.DataFrame()

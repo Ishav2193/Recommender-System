@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-import warnings
+#import warnings
 from utils import Utils
-import logging
+#import logging
 from numpy.linalg import norm
-warnings.filterwarnings('ignore')
+#warnings.filterwarnings('ignore')
 from dataclasses import dataclass
 
 
@@ -32,10 +32,10 @@ class DataPreprocessor:
         self.ingestion_config=DataLoader()
 
     def preprocessed_data(self):
-        logging.info('entered preprocessed block')
-        logging.info('started merging user and ratings')
+        #logging.info('entered preprocessed block')
+        #logging.info('started merging user and ratings')
         user_rating=self.ingestion_config.users.merge(self.ingestion_config.ratings,how='inner',on='user_id')
-        logging.info('started merging all three datasets')
+        #logging.info('started merging all three datasets')
         df=user_rating.merge(self.ingestion_config.movies,how='inner',on='movie_id')
         df.drop(columns=['user_id','timestamp','occ_desc','movie_id','zipcode'],axis=1,inplace=True)
         df.rename(columns={'user_emb_id':'user_id',
@@ -44,19 +44,19 @@ class DataPreprocessor:
         movies_to_consider=movies_with_rating_greater_than_100[movies_with_rating_greater_than_100]
         movies_to_consider=list(movies_to_consider.index)
         r=df['title'].isin(movies_to_consider)
-        logging.info('filtering the dataset required')
+        #logging.info('filtering the dataset required')
         df=df[r]
 
         return df
 
     def get_male_female_data(self):
         data=self.preprocessed_data()
-        logging.info('segregate data on basis of gender')
+        #logging.info('segregate data on basis of gender')
         df_female=data[data["gender"]=='F']
         df_male=data[data["gender"]=='M']
         df_female.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
         df_male.drop(columns=['age','gender','occupation'],axis=1,inplace=True)
-        logging.info('creating dictionary for age_desc')
+        #logging.info('creating dictionary for age_desc')
         d={}
         c=1
         for i in df_female['age_desc'].unique():
@@ -75,7 +75,7 @@ class DataPreprocessor:
         df_male['genres']=df_male['genres'].apply(Utils.convert_into_list)
         df_female=df_female.explode('genres')
         df_male=df_male.explode('genres')
-        logging.info('convert genres column to numerical value')
+        #logging.info('convert genres column to numerical value')
         n_d={}
         for i,j in list(zip(df_male['genres'].value_counts().sort_values(ascending=False).index,np.linspace(5,1,18))):
             n_d[i]=j
@@ -87,7 +87,7 @@ class DataPreprocessor:
             n_d_f[i]=j
 
         df_female['genres']=df_female['genres'].map(n_d_f)
-        logging.info('creating a new column for weighted average of genres and ratings')
+        #logging.info('creating a new column for weighted average of genres and ratings')
 
         df_female['weighted_average']=(2*df_female['rating']+df_female['genres'])/3
         df_male['weighted_average']=(2*df_male['rating']+df_male['genres'])/3
