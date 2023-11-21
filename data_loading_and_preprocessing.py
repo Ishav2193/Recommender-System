@@ -33,8 +33,6 @@ class DataPreprocessor:
 
     def preprocessed_data(self):
         logging.info('entered preprocessed block')
-        # self.ingestion_config.users.drop(columns='Unnamed: 0',axis=1,inplace=True)
-        # self.ingestion_config.ratings.drop(columns='Unnamed: 0',axis=1,inplace=True)
         logging.info('started merging user and ratings')
         user_rating=self.ingestion_config.users.merge(self.ingestion_config.ratings,how='inner',on='user_id')
         logging.info('started merging all three datasets')
