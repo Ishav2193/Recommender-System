@@ -27,8 +27,20 @@ class DataLoader:
 
 class DataPreprocessor:
 
+    '''
+
+    INITALIZE THE VARIABLES
+
+    '''
+
     def __init__(self):
         self.ingestion_config=DataLoader()
+
+    '''
+    
+    BELOW FUNCTION HELP ME FETCH THAT DATA WHERE MOVIES HAVE RATING GREATER THAN OR EQUAL TO 100
+
+    '''
 
     def preprocessed_data(self):
         #logging.info('entered preprocessed block')
@@ -47,7 +59,13 @@ class DataPreprocessor:
         df=df[r]
 
         return df
+    
+    '''
+    
+    THE BELOW FUNCTION HELP US SEGREGATE DATA ON BASIS OF GENDER ATTRIBUTE AN LABEL ENCODE THE DATA 
+    ON COLUMN AGE_DESC
 
+    '''
     def get_male_female_data(self):
         data=self.preprocessed_data()
         #logging.info('segregate data on basis of gender')
@@ -68,6 +86,13 @@ class DataPreprocessor:
         return (df_female,
                 df_male) 
     
+    '''
+    
+    HELP US CREATE A NEW FEATURE CALLED WEIGHTED AVERAGE WHICH IS MADE FROM ATTRIBUTES RATINGS AND GENRES
+    
+    '''
+
+
     def get_genres_into_numerical(self):
         df_female,df_male=self.get_male_female_data()
         df_female['genres']=df_female['genres'].apply(Utils.convert_into_list)

@@ -10,6 +10,11 @@ obj=DataPreprocessor()
 
 class MovieRecommender:
 
+    '''
+
+    THE BELOW FUNCTION IS USED TO GET FILTERED DATA ON BASIS OF GENDER AND AGE-BRACKET SELECTED
+
+    '''
     def get_data_with_user_ids(self,gender:str,age:str):
         #logging.info('started with get_data_with_users_block')
         df_female,df_male=obj.get_genres_into_numerical()
@@ -25,12 +30,18 @@ class MovieRecommender:
             user_id.append(data___['user_id'].unique()) 
             return user_id,data___
 
+    '''
+
+    THE BELOW FUNCTION IS USED TO GET TOP 5 USERS THAT HAVE SIMILAR TASTE TO PARTICULAR USER
+    WHOSE GENDER,AGE,USER_ID IS GIVEN
+
+    '''
+
     def recommend_users(self,gender,age,user_id,reqd_data):
         similar_user_ids=[]
         mapping_dict_for_age={'Under 18':1, '56+':7, '25-34':3, '50-55':4, '18-24':2, '45-49':6, '35-44':5} 
         age=pd.Series(age).map(mapping_dict_for_age).values[0]
         pt=reqd_data.pivot_table(values='weighted_average',index='user_id',columns='title').fillna(0)
-        pt1=pt
         p=pd.DataFrame(pt)
         p=p.reset_index()
         cos_simi=[]
@@ -47,6 +58,12 @@ class MovieRecommender:
         return (similar_user_ids,
                 pt,
                 p) 
+    
+    '''
+
+    THE BELOW FUNCTION HELP US GET THE LIST OF TOP 5 RECOMMENDED MOVIES FOR A PARTICULAR USER.
+    
+    '''
 
     def recommend(self,gender:str,age:str,user_id,reqd_data):
         similar_user_ids,pt,p=self.recommend_users(gender,age,user_id,reqd_data)
